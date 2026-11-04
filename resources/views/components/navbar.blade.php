@@ -9,19 +9,30 @@
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{ route('homepage') }}">Home</a>
                 </li>
-                <!-- Menu a tendina delle Categorie -->
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{ route('article.index') }}">Tutti gli articoli</a>
+                </li>
+                {{-- Menu a tendina delle Categorie (User Story #2) --}}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Categorie
                     </a>
                     <ul class="dropdown-menu">
                         @foreach ($categories as $category)
-                            <li><a class="dropdown-item" href="#">{{ $category->name }}</a></li>
+                            <li>
+                                <a class="dropdown-item text-capitalize" href="{{ route('byCategory', ['category' => $category]) }}">
+                                    {{ $category->name }}
+                                </a>
+                            </li>
+                            @if (!$loop->last)
+                                <li><hr class="dropdown-divider"></li>
+                            @endif
                         @endforeach
                     </ul>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
+                {{-- Gestione Autenticazione (User Story #1) --}}
                 @auth
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
