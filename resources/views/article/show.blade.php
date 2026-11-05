@@ -42,5 +42,4 @@
             </div>
         </div>
     </div>
-</x-layout>
-```[cite: 10]
+    </x-layout>
