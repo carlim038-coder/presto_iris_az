@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace App\Livewire;
 
 use App\Models\Article;
@@ -40,8 +41,10 @@ class CreateArticleForm extends Component
 
     protected function cleanForm()
     {
-        $this->title = '';$this->description = '';
-        $this->category = '';$this->price = '';
+        $this->title = '';
+        $this->description = '';
+        $this->category = '';
+        $this->price = '';
     }
 
     public function render()

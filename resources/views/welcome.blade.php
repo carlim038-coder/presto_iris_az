@@ -1,4 +1,9 @@
 <x-layout>
+    @if (session()->has('errorMessage'))
+    <div class="alert alert-danger text-center shadow rounded w-50 mx-auto">
+        {{ session('errorMessage') }}
+    </div>
+@endif
     {{-- Titolo principale della Homepage --}}
     <div class="container-fluid">
         <div class="row height-custom justify-content-center align-items-center text-center">

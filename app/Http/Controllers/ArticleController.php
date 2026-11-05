@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -23,7 +24,7 @@ class ArticleController extends Controller implements HasMiddleware
 
     public function index()
     {
-        $articles = Article::orderBy('created_at', 'desc')->paginate(6);
+        $articles = Article::where('is_accepted', true)->orderBy('created_at', 'desc')->paginate(6);
         return view('article.index', compact('articles'));
     }
 
@@ -34,7 +35,7 @@ class ArticleController extends Controller implements HasMiddleware
 
     public function byCategory(Category $category)
     {
-        $articles = $category->articles()->orderBy('created_at', 'desc')->paginate(6);
+        $articles = $category->articles()->where('is_accepted', true)->orderBy('created_at', 'desc')->paginate(6);
         return view('article.byCategory', compact('articles', 'category'));
     }
 }
