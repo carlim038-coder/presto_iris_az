@@ -77,7 +77,7 @@
             </div>
             <!--Grid column-->
 
-            <!--Grid column 5: LAVORA CON NOI / DIVENTA REVISORE (User Story #3) -->
+            <!--Grid column 5: BECOME A REVIEWER-->
             <div class="col-lg-4 col-md-12 mb-4 mb-md-0 text-center">
                 <h5 class="text-uppercase">DIVENTA REVISORE</h5>
                 <p class="small text-white">Vuoi collaborare con noi e avere un'entrata extra?</p>

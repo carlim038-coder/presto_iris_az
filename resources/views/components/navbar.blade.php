@@ -19,61 +19,76 @@
                     </a>
                     <ul class="dropdown-menu">
                         @foreach ($categories as $category)
-                            <li>
-                                <a class="dropdown-item text-capitalize" href="{{ route('byCategory', ['category' => $category]) }}">
-                                    {{ $category->name }}
-                                </a>
-                            </li>
-                            @if (!$loop->last)
-                                <li><hr class="dropdown-divider"></li>
-                            @endif
+                        <li>
+                            <a class="dropdown-item text-capitalize" href="{{ route('byCategory', ['category' => $category]) }}">
+                                {{ $category->name }}
+                            </a>
+                        </li>
+                        @if (!$loop->last)
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        @endif
                         @endforeach
                     </ul>
                 </li>
             </ul>
-            <ul class="navbar-nav ms-auto">
+
+            <ul class="navbar-nav ms-auto align-items-center">
+
+                {{-- FORM DI RICERCA (User Story #10) --}}
+                <form class="d-flex me-3" role="search" action="{{ route('article.search') }}" method="GET">
+                    <div class="input-group">
+                        <input type="search" name="query" class="form-control" placeholder="Search" aria-label="Search">
+                        <button type="submit" class="input-group-text btn btn-outline-success" id="basic-addon2">Search</button>
+                    </div>
+                </form>
                 {{-- Gestione Ruolo Revisore (User Story #3) --}}
                 @auth
-                    @if (Auth::user()->is_revisor)
-                        <li class="nav-item">
-                            <a class="nav-link btn btn-outline-success btn-sm position-relative w-sm-25 me-3" href="{{ route('revisor.index') }}">
-                                Zona revisore
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    {{ \App\Models\Article::toBeRevisedCount() }}
-                                </span>
-                            </a>
-                        </li>
-                    @endif
+                @if (Auth::user()->is_revisor)
+                <li class="nav-item">
+                    <a class="nav-link btn btn-outline-success btn-sm position-relative w-sm-25 me-3" href="{{ route('revisor.index') }}">
+                        Zona revisore
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{ \App\Models\Article::toBeRevisedCount() }}
+                        </span>
+                    </a>
+                </li>
+                @endif
                 @endauth
 
                 {{-- Gestione Autenticazione (User Story #1) --}}
                 @auth
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Ciao, {{ Auth::user()->name }}
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('create.article') }}">Crea</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.querySelector('#form-logout').submit();">Logout</a>
-                            </li>
-                        </ul>
-                        <form action="{{ route('logout') }}" method="post" class="d-none" id="form-logout">
-                            @csrf
-                        </form>
-                    </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Ciao, {{ Auth::user()->name }}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('create.article') }}">Crea</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.querySelector('#form-logout').submit();">Logout</a>
+                        </li>
+                    </ul>
+                    <form action="{{ route('logout') }}" method="post" class="d-none" id="form-logout">
+                        @csrf
+                    </form>
+                </li>
                 @else
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Ciao, utente!
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('login') }}">Accedi</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{{ route('register') }}">Registrati</a></li>
-                        </ul>
-                    </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Ciao, utente!
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('login') }}">Accedi</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{{ route('register') }}">Registrati</a></li>
+                    </ul>
+                </li>
                 @endauth
             </ul>
         </div>

@@ -19,3 +19,5 @@ Route::get('/show/article/{article}', [ArticleController::class, 'show'])->name(
 
 // Filtro per Categoria
 Route::get('/category/{category}', [ArticleController::class, 'byCategory'])->name('byCategory');
+// Filtro
+Route::get('/search/article', [PublicController::class, 'searchArticles'])->name('article.search');

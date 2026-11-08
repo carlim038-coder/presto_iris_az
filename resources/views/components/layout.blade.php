@@ -13,9 +13,9 @@
 <body>
     <x-navbar />
     <div class="min-vh-100">
-        @if (session('message'))
+        @if 
         <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-            {{ session('message') }}
+            
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
