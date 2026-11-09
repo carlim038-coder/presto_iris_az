@@ -8,15 +8,15 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>Presto.it</title>
 </head>
-</head>
 
 <body>
     <x-navbar />
     <div class="min-vh-100">
-        @if 
-        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-            
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        @if (session()->has('message'))
+        <div class="row justify-content-center">
+            <div class="col-5 alert alert-success text-center shadow rounded">
+                {{ session('message') }}
+            </div>
         </div>
         @endif
 

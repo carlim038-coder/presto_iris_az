@@ -8,18 +8,10 @@
                     </div>
                 </div>
             </div>
-
+            
             <div class="col-9">
-                @if (session()->has('message'))
-                    <div class="row justify-content-center mb-4">
-                        <div class="col-8 alert alert-success text-center shadow rounded">
-                            {{ session('message') }}
-                        </div>
-                    </div>
-                @endif
-
-                @if ($article_to_check)
-                    <div class="row justify-content-center pt-3">
+                @if($article_to_check)
+                    <div class="row justify-content-center pt-5">
                         <div class="col-md-8">
                             <div class="row justify-content-center">
                                 @for ($i = 0; $i < 6; $i++)
@@ -41,21 +33,21 @@
                                 <form action="{{ route('reject', ['article' => $article_to_check]) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
-                                    <button class="btn btn-danger py-2 px-4 fw-bold">Rifiuta</button>
+                                    <button class="btn btn-danger py-2 px-5 fw-bold">Rifiuta</button>
                                 </form>
                                 <form action="{{ route('accept', ['article' => $article_to_check]) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
-                                    <button class="btn btn-success py-2 px-4 fw-bold">Accetta</button>
+                                    <button class="btn btn-success py-2 px-5 fw-bold">Accetta</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 @else
-                    <div class="row justify-content-center align-items-center height-custom text-center py-5">
+                    <div class="row justify-content-center align-items-center height-custom text-center">
                         <div class="col-12">
                             <p class="fst-italic display-4">Nessun articolo da revisionare</p>
-                            <a href="{{ route('homepage') }}" class="mt-4 btn btn-success">Torna all'homepage</a>
+                            <a href="{{ route('homepage') }}" class="mt-5 btn btn-success">Torna all'homepage</a>
                         </div>
                     </div>
                 @endif
