@@ -4,8 +4,11 @@
         <h4 class="card-title">{{ $article->title }}</h4>
         <h5 class="card-subtitle text-body-secondary">{{ $article->price }} €</h5>
         <div class="d-flex justify-content-evenly align-items-center mt-5">
-            <a href="{{ route('article.show', compact('article')) }}" class="btn btn-primary">Dettaglio</a>
-            <a href="{{ route('byCategory', ['category' => $article->category]) }}" class="btn btn-outline-info text-capitalize">{{ $article->category->name }}</a>
+            <!-- Testo statico tradotto -->
+           <a href="{{ route('article.show', compact('article')) }}" class="btn btn-primary">{{ __('ui.details') }}</a>
+            
+            <!-- Nome della categoria tradotto dinamicamente come da specifiche -->
+            <a href="{{ route('byCategory', ['category' => $article->category]) }}" class="btn btn-outline-info text-capitalize">{{ __("ui." . $article->category->name) }}</a>
         </div>
     </div>
 </div>

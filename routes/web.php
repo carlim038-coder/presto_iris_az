@@ -4,11 +4,12 @@ use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\RevisorController;
 
-Route::get('/revisor/index', [RevisorController::class, 'index'])->middleware('isRevisor')->name('revisor.index');
+Route::post('/lang/{lang}', [PublicController::class, 'setLanguage'])->name('setLanguage');Route::get('/revisor/index', [RevisorController::class, 'index'])->middleware('isRevisor')->name('revisor.index');
 Route::patch('/accept/{article}', [RevisorController::class, 'accept'])->name('accept');
 Route::patch('/reject/{article}', [RevisorController::class, 'reject'])->name('reject');
 Route::get('/become/revisor', [RevisorController::class, 'becomeRevisor'])->middleware('auth')->name('become.revisor');
 Route::get('/make/revisor/{user}', [RevisorController::class, 'makeRevisor'])->name('make.revisor');
+
 // Homepage
 Route::get('/', [PublicController::class, 'homepage'])->name('homepage');
 

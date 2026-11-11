@@ -5,16 +5,16 @@
         <div class="row">
             <!--Grid column 1: SEE OTHER BOOKS-->
             <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-                <h5 class="text-uppercase">SEE OTHER BOOKS</h5>
+                <h5 class="text-uppercase">{{ __('ui.seeOtherBooks') }}</h5>
                 <ul class="list-unstyled mb-0">
                     <li>
-                        <a href="#!" class="text-white text-decoration-none">Bestsellers</a>
+                        <a href="#!" class="text-white text-decoration-none">{{ __('ui.bestsellers') }}</a>
                     </li>
                     <li>
-                        <a href="#!" class="text-white text-decoration-none">All books</a>
+                        <a href="#!" class="text-white text-decoration-none">{{ __('ui.allBooks') }}</a>
                     </li>
                     <li>
-                        <a href="#!" class="text-white text-decoration-none">Our authors</a>
+                        <a href="#!" class="text-white text-decoration-none">{{ __('ui.ourAuthors') }}</a>
                     </li>
                 </ul>
             </div>
@@ -22,19 +22,19 @@
 
             <!--Grid column 2: EXECUTION OF THE CONTRACT-->
             <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-                <h5 class="text-uppercase">CONTRACT</h5>
+                <h5 class="text-uppercase">{{ __('ui.contract') }}</h5>
                 <ul class="list-unstyled mb-0">
                     <li>
-                        <a href="#!" class="text-white text-decoration-none">Supply</a>
+                        <a href="#!" class="text-white text-decoration-none">{{ __('ui.supply') }}</a>
                     </li>
                     <li>
-                        <a href="#!" class="text-white text-decoration-none">Returns</a>
+                        <a href="#!" class="text-white text-decoration-none">{{ __('ui.returns') }}</a>
                     </li>
                     <li>
-                        <a href="#!" class="text-white text-decoration-none">Regulations</a>
+                        <a href="#!" class="text-white text-decoration-none">{{ __('ui.regulations') }}</a>
                     </li>
                     <li>
-                        <a href="#!" class="text-white text-decoration-none">Privacy policy</a>
+                        <a href="#!" class="text-white text-decoration-none">{{ __('ui.privacyPolicy') }}</a>
                     </li>
                 </ul>
             </div>
@@ -42,7 +42,7 @@
 
             <!--Grid column 3: PUBLISHING HOUSE-->
             <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-                <h5 class="text-uppercase">HOUSE</h5>
+                <h5 class="text-uppercase">{{ __('ui.house') }}</h5>
                 <ul class="list-unstyled mb-0">
                     <li>
                         <p class="text-white mb-1">The BookStore</p>
@@ -54,7 +54,7 @@
                         <p class="text-white mb-1">05765 NY</p>
                     </li>
                     <li>
-                        <p class="text-white mb-0">Send us a book</p>
+                        <p class="text-white mb-0">{{ __('ui.sendUsABook') }}</p>
                     </li>
                 </ul>
             </div>
@@ -62,32 +62,30 @@
 
             <!--Grid column 4: WRITE TO US-->
             <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-                <h5 class="text-uppercase">WRITE TO US</h5>
+                <h5 class="text-uppercase">{{ __('ui.writeToUs') }}</h5>
                 <ul class="list-unstyled mb-0">
                     <li>
-                        <a href="#!" class="text-white text-decoration-none">Help in purchasing</a>
+                        <a href="#!" class="text-white text-decoration-none">{{ __('ui.helpPurchasing') }}</a>
                     </li>
                     <li>
-                        <a href="#!" class="text-white text-decoration-none">Check order status</a>
+                        <a href="#!" class="text-white text-decoration-none">{{ __('ui.checkOrderStatus') }}</a>
                     </li>
                     <li>
-                        <a href="#!" class="text-white text-decoration-none">Join newsletter</a>
+                        <a href="#!" class="text-white text-decoration-none">{{ __('ui.joinNewsletter') }}</a>
                     </li>
                 </ul>
             </div>
-            <!--Grid column-->
-
             <!--Grid column 5: BECOME A REVIEWER-->
             <div class="col-lg-4 col-md-12 mb-4 mb-md-0 text-center">
-                <h5 class="text-uppercase">DIVENTA REVISORE</h5>
-                <p class="small text-white">Vuoi collaborare con noi e avere un'entrata extra?</p>
-                <a href="{{ route('become.revisor') }}" class="btn btn-success btn-sm fw-bold">Diventa revisore</a>
+                <h5 class="text-uppercase">{{ __('ui.becomeRevisorTitle') }}</h5>
+                <p class="small text-white">{{ __('ui.becomeRevisorDescription') }}</p>
+                <a href="{{ route('become.revisor') }}" class="btn btn-success btn-sm fw-bold">{{ __('ui.becomeRevisorButton') }}</a>
             </div>
-            <!--Grid column-->
+            
         </div>
-        <!--Grid row-->
+       
     </div>
-    <!-- Grid container -->
+    
 
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
