@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
+use App\Models\Image;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Article extends Model
 {
@@ -34,6 +36,11 @@ class Article extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function images(): HasMany
+    {
+        return $this->hasMany(Image::class);
+    }
+
     public function setAccepted($value)
     {
         $this->is_accepted = $value;
@@ -45,6 +52,7 @@ class Article extends Model
     {
         return Article::where('is_accepted', null)->count();
     }
+
     public function toSearchableArray()
     {
         return [
