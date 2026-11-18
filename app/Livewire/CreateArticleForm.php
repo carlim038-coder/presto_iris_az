@@ -4,36 +4,36 @@ namespace App\Livewire;
 
 use App\Models\Article;
 use Livewire\Component;
-use Livewire\Attributes\Validate;
-use Illuminate\Support\Facades\Auth;
+use App\Jobs\ResizeImage;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class CreateArticleForm extends Component
 {
     use WithFileUploads;
 
-    #[Validate('required|min:5')]
     public $title;
-
-    #[Validate('required|min:10')]
     public $description;
-
-    #[Validate('required|numeric')]
     public $price;
-
-    #[Validate('required')]
     public $category;
-
+    
+    public $images = [];
+    public $temporary_images = [];
     public $article;
 
-    public $images = [];
-    public $temporary_images;
+    protected $rules = [
+        'title' => 'required|min:3',
+        'description' => 'required|min:10',
+        'price' => 'required|numeric',
+        'category' => 'required',
+        'images.*' => 'image|max:1024',
+    ];
 
-    public function updatedTemporaryImages()
+       public function updatedTemporaryImages()
     {
         if ($this->validate([
             'temporary_images.*' => 'image|max:1024',
-            'temporary_images' => 'max:6'
         ])) {
             foreach ($this->temporary_images as $image) {
                 $this->images[] = $image;
@@ -47,7 +47,7 @@ class CreateArticleForm extends Component
             unset($this->images[$key]);
         }
     }
-
+    
     public function store()
     {
         $this->validate();
@@ -62,21 +62,32 @@ class CreateArticleForm extends Component
 
         if (count($this->images) > 0) {
             foreach ($this->images as $image) {
-                $this->article->images()->create(['path' => $image->store('images', 'public')]);
+                $newFileName = "articles/{$this->article->id}";
+                
+                $newImage = $this->article->images()->create([
+                    'path' => $image->store($newFileName, 'public')
+                ]);
+                
+                // Invio del job in coda per il crop asincrono dell'immagine
+                dispatch(new ResizeImage($newImage->path, 300, 300));
             }
+            
+            // Pulizia della cartella temporanea di Livewire
+            File::deleteDirectory(storage_path('/app/livewire-tmp'));
         }
 
         session()->flash('success', 'Articolo creato correttamente');
         $this->cleanForm();
     }
 
-    protected function cleanForm()
+    public function cleanForm()
     {
         $this->title = '';
         $this->description = '';
-        $this->category = '';
         $this->price = '';
+        $this->category = '';
         $this->images = [];
+        $this->temporary_images = [];
     }
 
     public function render()

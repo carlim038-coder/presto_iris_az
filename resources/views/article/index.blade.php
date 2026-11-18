@@ -2,7 +2,7 @@
     <div class="container my-5">
         <div class="row">
             <div class="col-12 text-center">
-                <hdisplay class="display-4">Tutti gli articoli</hdisplay>
+                <h1 class="display-4">Tutti gli articoli</h1>
             </div>
         </div>
 
@@ -10,6 +10,7 @@
             @forelse ($articles as $article)
                 <div class="col-12 col-md-4 mb-4">
                     <div class="card shadow h-100">
+                        <img src="{{ $article->images->isNotEmpty() ? $article->images->first()->getUrl(300, 300) : 'https://picsum.photos/200' }}" class="card-img-top card-img-custom" alt="Immagine dell'articolo {{ $article->title }}">
                         <div class="card-body d-flex flex-column justify-content-between">
                             <div>
                                 <h4 class="card-title">{{ $article->title }}</h4>

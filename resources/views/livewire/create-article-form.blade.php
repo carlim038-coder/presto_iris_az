@@ -42,7 +42,7 @@
         @enderror
     </div>
 
-    <!-- Inserimento Immagini Multiple e Anteprima -->
+    <!-- Sezione Caricamento Immagini e Anteprime -->
     <div class="mb-3">
         <label for="temporary_images" class="form-label">Immagini:</label>
         <input type="file" wire:model.live="temporary_images" multiple
@@ -61,7 +61,7 @@
                 <p>Photo preview:</p>
                 <div class="row border border-4 border-success rounded shadow py-4">
                     @foreach ($images as $key => $image)
-                        <div class="col d-flex flex-column align-items-center my-3">
+                        <div class="col d-flex flex-column align-items-center my-3" wire:key="image-{{ $key }}">
                             <div class="img-preview mx-auto shadow rounded"
                                  style="background-image: url({{ $image->temporaryUrl() }});"></div>
                             <button type="button" class="btn mt-1 btn-danger"
