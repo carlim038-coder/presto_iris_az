@@ -1,5 +1,6 @@
 @import 'bootstrap';
-
+@import 'bootstrap';
+@import 'bootstrap-icons';
 .img-preview{
     background-position: center;
     background-repeat: no-repeat;

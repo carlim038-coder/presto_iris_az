@@ -10,6 +10,12 @@ class Image extends Model
     use HasFactory;
 
     protected $fillable = ['path', 'article_id'];
+    protected function casts(): array
+{
+    return [
+        'labels' => 'array',
+    ];
+}
 
     public static function getUrlByFilePath($filePath, $w = null, $h = null)
     {

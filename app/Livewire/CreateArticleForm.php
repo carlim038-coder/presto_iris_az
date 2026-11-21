@@ -2,12 +2,14 @@
 
 namespace App\Livewire;
 
-use App\Models\Article;
-use Livewire\Component;
+use App\Jobs\GoogleVisionLabelImage;
+use App\Jobs\GoogleVisionSafeSearch;
 use App\Jobs\ResizeImage;
-use Livewire\WithFileUploads;
+use App\Models\Article;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CreateArticleForm extends Component
 {
@@ -17,7 +19,7 @@ class CreateArticleForm extends Component
     public $description;
     public $price;
     public $category;
-    
+
     public $images = [];
     public $temporary_images = [];
     public $article;
@@ -30,7 +32,7 @@ class CreateArticleForm extends Component
         'images.*' => 'image|max:1024',
     ];
 
-       public function updatedTemporaryImages()
+    public function updatedTemporaryImages()
     {
         if ($this->validate([
             'temporary_images.*' => 'image|max:1024',
@@ -47,7 +49,7 @@ class CreateArticleForm extends Component
             unset($this->images[$key]);
         }
     }
-    
+
     public function store()
     {
         $this->validate();
@@ -63,16 +65,16 @@ class CreateArticleForm extends Component
         if (count($this->images) > 0) {
             foreach ($this->images as $image) {
                 $newFileName = "articles/{$this->article->id}";
-                
+
                 $newImage = $this->article->images()->create([
                     'path' => $image->store($newFileName, 'public')
                 ]);
-                
-                // Invio del job in coda per il crop asincrono dell'immagine
+
                 dispatch(new ResizeImage($newImage->path, 300, 300));
+                dispatch(new GoogleVisionSafeSearch($newImage->id));
+                dispatch(new GoogleVisionLabelImage($newImage->id));
             }
-            
-            // Pulizia della cartella temporanea di Livewire
+
             File::deleteDirectory(storage_path('/app/livewire-tmp'));
         }
 
